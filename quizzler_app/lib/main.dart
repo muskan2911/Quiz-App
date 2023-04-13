@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizzler_app/quizbrain.dart';
 
-QuizBrain quizBrain =QuizBrain();
+QuizBrain quizBrain = QuizBrain();
 void main() => runApp(const Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -14,13 +14,13 @@ class Quizzler extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(
-                'MyQuizApp',
-                style: TextStyle(
-                  color: Colors .white,
-                  fontSize: 20.0,
-                ),
-                ),
-            backgroundColor: Colors.blueGrey,
+            'MyQuizApp',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+            ),
+          ),
+          backgroundColor: Colors.blueGrey,
         ),
         backgroundColor: Colors.grey.shade900,
         body: const SafeArea(
@@ -42,10 +42,15 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-
   int i = 1;
   List<bool> myanswer = [];
   List<Icon> scoreKeeper = [];
+  String displayquesNo(i) {
+    if (i < 14) {
+      return "Q.No $i ";
+    } else
+      return "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +61,7 @@ class _QuizPageState extends State<QuizPage> {
           flex: 4,
           child: Center(
             child: Text(
-              "Q.No $i " + quizBrain.questionlist[i - 1].questionText,
+              displayquesNo(i) + quizBrain.getQuestionText(i - 1),
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 25.0,
@@ -80,7 +85,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   myanswer.add(true);
-                  if (quizBrain.questionlist[i - 1].questionAnswer == myanswer[i - 1]) {
+                  if (quizBrain.getQuestionAnswer(i - 1) == myanswer[i - 1]) {
                     scoreKeeper.add(const Icon(
                       Icons.check,
                       color: Colors.green,
@@ -112,7 +117,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   myanswer.add(false);
-                  if (quizBrain.questionlist[i - 1].questionAnswer == myanswer[i - 1]) {
+                  if (quizBrain.getQuestionAnswer(i - 1) == myanswer[i - 1]) {
                     scoreKeeper.add(const Icon(
                       Icons.check,
                       color: Colors.green,
@@ -136,9 +141,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
