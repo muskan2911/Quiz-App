@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler_app/quizbrain.dart';
 
+QuizBrain quizBrain =QuizBrain();
 void main() => runApp(const Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -8,7 +10,18 @@ class Quizzler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+                'MyQuizApp',
+                style: TextStyle(
+                  color: Colors .white,
+                  fontSize: 20.0,
+                ),
+                ),
+            backgroundColor: Colors.blueGrey,
+        ),
         backgroundColor: Colors.grey.shade900,
         body: const SafeArea(
           child: Padding(
@@ -31,23 +44,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
 
   int i = 1;
-
-  List<String> question = [
-    'Chennai got good food',
-    'Bahut garmi hai sala',
-    'you are gay',
-    'We will get placed',
-    'Srm chutiya hai'
-  ];
-
-  List<bool> answer = [
-    false,
-    true,
-    true,
-    false,
-    true,
-  ];
-
   List<bool> myanswer = [];
   List<Icon> scoreKeeper = [];
 
@@ -57,12 +53,12 @@ class _QuizPageState extends State<QuizPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Expanded(
-          flex: 5,
+          flex: 4,
           child: Center(
             child: Text(
-              "Q.No $i " + question[i-1],
+              "Q.No $i " + quizBrain.questionlist[i - 1].questionText,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 25.0,
                 color: Colors.white,
               ),
@@ -84,7 +80,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   myanswer.add(true);
-                  if (myanswer[i-1] == answer[i-1]) {
+                  if (quizBrain.questionlist[i - 1].questionAnswer == myanswer[i - 1]) {
                     scoreKeeper.add(const Icon(
                       Icons.check,
                       color: Colors.green,
@@ -116,7 +112,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   myanswer.add(false);
-                  if (answer[i-1] == myanswer[i-1]) {
+                  if (quizBrain.questionlist[i - 1].questionAnswer == myanswer[i - 1]) {
                     scoreKeeper.add(const Icon(
                       Icons.check,
                       color: Colors.green,
