@@ -36,7 +36,6 @@ class Quizzler extends StatelessWidget {
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
-
   @override
   _QuizPageState createState() => _QuizPageState();
 }
@@ -51,7 +50,6 @@ class _QuizPageState extends State<QuizPage> {
     } else
       return "";
   }
-
   @override
   Widget build(BuildContext context) {
     return Column(
