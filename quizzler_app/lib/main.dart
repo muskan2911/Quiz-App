@@ -46,7 +46,7 @@ class _QuizPageState extends State<QuizPage> {
   List<bool> myanswer = [];
   List<Icon> scoreKeeper = [];
   String displayquesNo(i) {
-    if (i < 14) {
+    if (i < quizBrain.getlength()) {
       return "Q.No $i ";
     } else
       return "";
