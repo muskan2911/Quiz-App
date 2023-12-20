@@ -105,8 +105,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.red),
-              child: const Text(
-                'False',
+              child: const Text('False',
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.white,
